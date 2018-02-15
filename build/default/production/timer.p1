@@ -1,14 +1,15 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"562 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic12f629.h
-[v _CMCON `Vuc ~T0 @X0 0 e@25 ]
-"697
-[s S38 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S38 . TRISIO0 TRISIO1 TRISIO2 TRISIO3 TRISIO4 TRISIO5 ]
-"696
-[u S37 `S38 1 ]
-[n S37 . . ]
-"706
-[v _TRISIObits `VS37 ~T0 @X0 0 e@133 ]
+"330 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic12f629.h
+[s S19 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S19 . GPIF INTF T0IF GPIE INTE T0IE PEIE GIE ]
+"340
+[s S20 :2 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
+[n S20 . . TMR0IF . TMR0IE ]
+"329
+[u S18 `S19 1 `S20 1 ]
+[n S18 . . . ]
+"347
+[v _INTCONbits `VS18 ~T0 @X0 0 e@11 ]
 "627
 [s S35 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S35 . PS PSA T0SE T0CS INTEDG nGPPU ]
@@ -20,21 +21,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S34 . . . ]
 "641
 [v _OPTION_REGbits `VS34 ~T0 @X0 0 e@129 ]
-"222
-[s S14 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S14 . GP0 GP1 GP2 GP3 GP4 GP5 ]
-"230
-[s S15 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S15 . GPIO0 GPIO1 GPIO2 GPIO3 GPIO4 GPIO5 ]
-"221
-[u S13 `S14 1 `S15 1 ]
-[n S13 . . . ]
-"239
-[v _GPIObits `VS13 ~T0 @X0 0 e@5 ]
-[v F575 `(v ~T0 @X0 1 tf1`ul ]
-"153 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic.h
-[v __delay `JF575 ~T0 @X0 0 e ]
-[p i __delay ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -578,89 +564,103 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic.h: 193: extern __bank0 unsigned char __resetbits;
 [; ;pic.h: 194: extern __bank0 __bit __powerdown;
 [; ;pic.h: 195: extern __bank0 __bit __timeout;
-[; ;IO.h: 10: void IO_init(void);
-[; ;IO.h: 11: void led_click(int);
-[; ;IO.h: 12: void Send_data(char[]);
-"6 IO.c
-[v _IO_init `(v ~T0 @X0 1 ef ]
+[; ;stdint.h: 13: typedef signed char int8_t;
+[; ;stdint.h: 20: typedef signed int int16_t;
+[; ;stdint.h: 28: typedef signed short long int int24_t;
+[; ;stdint.h: 36: typedef signed long int int32_t;
+[; ;stdint.h: 43: typedef unsigned char uint8_t;
+[; ;stdint.h: 49: typedef unsigned int uint16_t;
+[; ;stdint.h: 56: typedef unsigned short long int uint24_t;
+[; ;stdint.h: 63: typedef unsigned long int uint32_t;
+[; ;stdint.h: 71: typedef signed char int_least8_t;
+[; ;stdint.h: 78: typedef signed int int_least16_t;
+[; ;stdint.h: 90: typedef signed short long int int_least24_t;
+[; ;stdint.h: 98: typedef signed long int int_least32_t;
+[; ;stdint.h: 105: typedef unsigned char uint_least8_t;
+[; ;stdint.h: 111: typedef unsigned int uint_least16_t;
+[; ;stdint.h: 121: typedef unsigned short long int uint_least24_t;
+[; ;stdint.h: 128: typedef unsigned long int uint_least32_t;
+[; ;stdint.h: 137: typedef signed char int_fast8_t;
+[; ;stdint.h: 144: typedef signed int int_fast16_t;
+[; ;stdint.h: 156: typedef signed short long int int_fast24_t;
+[; ;stdint.h: 164: typedef signed long int int_fast32_t;
+[; ;stdint.h: 171: typedef unsigned char uint_fast8_t;
+[; ;stdint.h: 177: typedef unsigned int uint_fast16_t;
+[; ;stdint.h: 187: typedef unsigned short long int uint_fast24_t;
+[; ;stdint.h: 194: typedef unsigned long int uint_fast32_t;
+[; ;stdint.h: 200: typedef int32_t intmax_t;
+[; ;stdint.h: 205: typedef uint32_t uintmax_t;
+[; ;stdint.h: 210: typedef int16_t intptr_t;
+[; ;stdint.h: 215: typedef uint16_t uintptr_t;
+[; ;timer.h: 7: void Timer_init(void);
+[; ;timer.h: 8: void interrupt kes(void);
+[; ;timer.h: 10: extern uint32_t timetick;
+"4 timer.c
+[v _timetick `ul ~T0 @X0 1 e ]
+[i _timetick
+-> -> -> 0 `i `l `ul
+]
+[; ;timer.c: 4: uint32_t timetick=0;
+"6
+[v _Timer_init `(v ~T0 @X0 1 ef ]
 {
-[; ;IO.c: 6: void IO_init(){
-[e :U _IO_init ]
+[; ;timer.c: 6: void Timer_init(){
+[e :U _Timer_init ]
 [f ]
-[; ;IO.c: 8: CMCON = 0x07;
+[; ;timer.c: 7: INTCONbits.GIE=1;
+"7
+[e = . . _INTCONbits 0 7 -> -> 1 `i `uc ]
+[; ;timer.c: 8: INTCONbits.T0IE=1;
 "8
-[e = _CMCON -> -> 7 `i `uc ]
-[; ;IO.c: 10: TRISIObits.TRISIO1=0;
-"10
-[e = . . _TRISIObits 0 1 -> -> 0 `i `uc ]
-[; ;IO.c: 11: OPTION_REGbits.nGPPU=1;
+[e = . . _INTCONbits 0 5 -> -> 1 `i `uc ]
+[; ;timer.c: 9: INTCONbits.T0IF=0;
+"9
+[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
+[; ;timer.c: 11: OPTION_REGbits.T0CS=0;
 "11
-[e = . . _OPTION_REGbits 0 5 -> -> 1 `i `uc ]
-[; ;IO.c: 13: TRISIObits.TRISIO2=1;
+[e = . . _OPTION_REGbits 0 3 -> -> 0 `i `uc ]
+[; ;timer.c: 12: OPTION_REGbits.T0SE=0;
+"12
+[e = . . _OPTION_REGbits 0 2 -> -> 0 `i `uc ]
+[; ;timer.c: 13: OPTION_REGbits.PSA=0;
 "13
-[e = . . _TRISIObits 0 2 -> -> 1 `i `uc ]
-[; ;IO.c: 14: TRISIObits.TRISIO3=1;
+[e = . . _OPTION_REGbits 0 1 -> -> 0 `i `uc ]
+[; ;timer.c: 14: OPTION_REGbits.PS0=0;
 "14
-[e = . . _TRISIObits 0 3 -> -> 1 `i `uc ]
-[; ;IO.c: 15: TRISIObits.TRISIO4=1;
+[e = . . _OPTION_REGbits 1 0 -> -> 0 `i `uc ]
+[; ;timer.c: 15: OPTION_REGbits.PS1=0;
 "15
-[e = . . _TRISIObits 0 4 -> -> 1 `i `uc ]
-[; ;IO.c: 16: TRISIObits.TRISIO5=1;
+[e = . . _OPTION_REGbits 1 1 -> -> 0 `i `uc ]
+[; ;timer.c: 16: OPTION_REGbits.PS2=0;
 "16
-[e = . . _TRISIObits 0 5 -> -> 1 `i `uc ]
-[; ;IO.c: 19: }
-"19
+[e = . . _OPTION_REGbits 1 2 -> -> 0 `i `uc ]
+[; ;timer.c: 17: }
+"17
 [e :UE 69 ]
 }
+[v $root$_kes `(v ~T0 @X0 0 e ]
+[v F614 `(v ~T0 @X0 1 tf ]
+"19
+[v _kes `IF614 ~T0 @X0 1 e ]
+{
+[; ;timer.c: 19: void interrupt kes(void){
+[e :U _kes ]
+[f ]
+[; ;timer.c: 20: if(INTCONbits.T0IF && INTCONbits.T0IE){
+"20
+[e $ ! && != -> . . _INTCONbits 0 2 `i -> -> -> 0 `i `Vuc `i != -> . . _INTCONbits 0 5 `i -> -> -> 0 `i `Vuc `i 71  ]
+{
+[; ;timer.c: 21: timetick++;
 "21
-[v _led_click `(v ~T0 @X0 1 ef1`i ]
-{
-[; ;IO.c: 21: void led_click(int times){
-[e :U _led_click ]
-[v _times `i ~T0 @X0 1 r1 ]
-[f ]
-[; ;IO.c: 22: for(int i=0;i<times;i++){
+[e ++ _timetick -> -> -> 1 `i `l `ul ]
+[; ;timer.c: 22: INTCONbits.T0IF=0;
 "22
-{
-[v _i `i ~T0 @X0 1 a ]
-[e = _i -> 0 `i ]
-[e $U 74  ]
-[e :U 71 ]
-{
-[; ;IO.c: 23: GPIObits.GP1=1;
+[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
 "23
-[e = . . _GPIObits 0 1 -> -> 1 `i `uc ]
-[; ;IO.c: 24: _delay((unsigned long)((200)*(4000000/4000.0)));
-"24
-[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-[; ;IO.c: 25: GPIObits.GP1=0;
+}
+[e :U 71 ]
+[; ;timer.c: 23: }
+[; ;timer.c: 25: }
 "25
-[e = . . _GPIObits 0 1 -> -> 0 `i `uc ]
-[; ;IO.c: 26: _delay((unsigned long)((200)*(4000000/4000.0)));
-"26
-[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"27
-}
-"22
-[e ++ _i -> 1 `i ]
-[e :U 74 ]
-[e $ < _i _times 71  ]
-[e :U 72 ]
-"27
-}
-[; ;IO.c: 27: }
-[; ;IO.c: 28: }
-"28
 [e :UE 70 ]
-}
-"30
-[v _Send_data `(v ~T0 @X0 1 ef1`*uc ]
-{
-[; ;IO.c: 30: void Send_data(char command[]){
-[e :U _Send_data ]
-[v _command `*uc ~T0 @X0 1 r1 ]
-[f ]
-[; ;IO.c: 32: }
-"32
-[e :UE 75 ]
 }

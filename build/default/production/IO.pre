@@ -760,8 +760,10 @@ extern __bank0 __bit __timeout;
 
 # 10 "IO.h"
 void IO_init(void);
+void led_click(int);
+void Send_data(char[]);
 
-# 5 "IO.c"
+# 6 "IO.c"
 void IO_init(){
 
 CMCON = 0x07;
@@ -777,9 +779,15 @@ TRISIObits.TRISIO5=1;
 
 }
 
-int Button_check(){
-if(GPIObits.GP2 || GPIObits.GP3 || GPIObits.GP4 || GPIObits.GP5)
-return 1;
-else
-return 0;
+void led_click(int times){
+for(int i=0;i<times;i++){
+GPIObits.GP1=1;
+_delay((unsigned long)((200)*(4000000/4000.0)));
+GPIObits.GP1=0;
+_delay((unsigned long)((200)*(4000000/4000.0)));
+}
+}
+
+void Send_data(char command[]){
+
 }

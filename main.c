@@ -7,24 +7,48 @@
 
 
 #include <xc.h>
+#include <stdint.h>
 #include "config.h"
 #include "IO.h"
+#include "timer.h"
 
 #define _XTAL_FREQ 4000000
+
+uint32_t timetochange=0;
 
 void main(void) {
 
     IO_init();
+    Timer_init();
     
     LED =1;
-            
-    while(Button_check()){
+    timetochange=timetick;
 
-        LED =0;
-            
-            
-        
+    while(1){
+        if(timetick-timetochange>=1000){
+            LED^=1;
+            timetochange=timetick;
+        }
     }
+    while (1) {
+        
+        if(BUTTON1){
+            led_click(1);
+        }else{
+            if(BUTTON2){
+                led_click(2);
+            }else{
+                if(BUTTON3){  //bozuk 
+                    led_click(3);
+                }else{
+                    if(BUTTON4){
+                        led_click(4);
+                    }
+                }
+            }
+        }
+    }
+
     
     return;
 }

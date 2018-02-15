@@ -8,7 +8,8 @@
 #define LED        GPIObits.GP1
 
 void IO_init(void);
-
-
+void led_click(int);
+void Send_data(char[]);
+        
 #endif	/* XC_HEADER_TEMPLATE_H */
 

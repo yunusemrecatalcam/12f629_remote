@@ -1,6 +1,7 @@
 #include <xc.h>
-
 #include "IO.h"
+#include "timer.h"
+#define _XTAL_FREQ 4000000
 
 void IO_init(){
 
@@ -17,9 +18,15 @@ void IO_init(){
     
 }
 
-int Button_check(){
-    if(BUTTON1 || BUTTON2 || BUTTON3 || BUTTON4)
-        return 1;
-    else
-        return 0;
+void led_click(int times){
+    for(int i=0;i<times;i++){
+        LED=1;
+        __delay_ms(200);
+        LED=0;
+        __delay_ms(200);
+    }
+}
+
+void Send_data(char command[]){
+    
 }
