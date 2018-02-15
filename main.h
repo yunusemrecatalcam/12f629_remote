@@ -1,0 +1,6 @@
+#ifndef XC_HEADER_TEMPLATE_H
+#define	XC_HEADER_TEMPLATE_H
+
+
+#endif	/* XC_HEADER_TEMPLATE_H */
+
