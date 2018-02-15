@@ -1,7 +1,11 @@
 #include <xc.h>
+#include <stdint.h>
+
 #include "IO.h"
 #include "timer.h"
 #define _XTAL_FREQ 4000000
+
+uint32_t change_state=0;
 
 void IO_init(){
 
@@ -14,6 +18,7 @@ void IO_init(){
     TRISIObits.TRISIO3=1;
     TRISIObits.TRISIO4=1;
     TRISIObits.TRISIO5=1;
+    TRISIObits.TRISIO0=0;//data pin output
     
     
 }
@@ -27,6 +32,11 @@ void led_click(int times){
     }
 }
 
-void Send_data(char command[]){
-    
+void Send_data(){
+    LED=1;
+    change_state=timetick;
+    for(int i=0;i<24;i++){
+        if(timetick-change_state>=1000)
+        LED ^=1;
+    }
 }

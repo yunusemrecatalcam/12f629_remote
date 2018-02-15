@@ -35,6 +35,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 "153 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic.h
 [v __delay `JF575 ~T0 @X0 0 e ]
 [p i __delay ]
+"10 timer.h
+[v _timetick `ul ~T0 @X0 0 e ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -578,89 +580,159 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic.h: 193: extern __bank0 unsigned char __resetbits;
 [; ;pic.h: 194: extern __bank0 __bit __powerdown;
 [; ;pic.h: 195: extern __bank0 __bit __timeout;
+[; ;stdint.h: 13: typedef signed char int8_t;
+[; ;stdint.h: 20: typedef signed int int16_t;
+[; ;stdint.h: 28: typedef signed short long int int24_t;
+[; ;stdint.h: 36: typedef signed long int int32_t;
+[; ;stdint.h: 43: typedef unsigned char uint8_t;
+[; ;stdint.h: 49: typedef unsigned int uint16_t;
+[; ;stdint.h: 56: typedef unsigned short long int uint24_t;
+[; ;stdint.h: 63: typedef unsigned long int uint32_t;
+[; ;stdint.h: 71: typedef signed char int_least8_t;
+[; ;stdint.h: 78: typedef signed int int_least16_t;
+[; ;stdint.h: 90: typedef signed short long int int_least24_t;
+[; ;stdint.h: 98: typedef signed long int int_least32_t;
+[; ;stdint.h: 105: typedef unsigned char uint_least8_t;
+[; ;stdint.h: 111: typedef unsigned int uint_least16_t;
+[; ;stdint.h: 121: typedef unsigned short long int uint_least24_t;
+[; ;stdint.h: 128: typedef unsigned long int uint_least32_t;
+[; ;stdint.h: 137: typedef signed char int_fast8_t;
+[; ;stdint.h: 144: typedef signed int int_fast16_t;
+[; ;stdint.h: 156: typedef signed short long int int_fast24_t;
+[; ;stdint.h: 164: typedef signed long int int_fast32_t;
+[; ;stdint.h: 171: typedef unsigned char uint_fast8_t;
+[; ;stdint.h: 177: typedef unsigned int uint_fast16_t;
+[; ;stdint.h: 187: typedef unsigned short long int uint_fast24_t;
+[; ;stdint.h: 194: typedef unsigned long int uint_fast32_t;
+[; ;stdint.h: 200: typedef int32_t intmax_t;
+[; ;stdint.h: 205: typedef uint32_t uintmax_t;
+[; ;stdint.h: 210: typedef int16_t intptr_t;
+[; ;stdint.h: 215: typedef uint16_t uintptr_t;
 [; ;IO.h: 10: void IO_init(void);
 [; ;IO.h: 11: void led_click(int);
-[; ;IO.h: 12: void Send_data(char[]);
-"6 IO.c
+[; ;IO.h: 12: void Send_data();
+[; ;timer.h: 7: void Timer_init(void);
+[; ;timer.h: 8: void interrupt kes(void);
+[; ;timer.h: 10: extern uint32_t timetick;
+"8 IO.c
+[v _change_state `ul ~T0 @X0 1 e ]
+[i _change_state
+-> -> -> 0 `i `l `ul
+]
+[; ;IO.c: 8: uint32_t change_state=0;
+"10
 [v _IO_init `(v ~T0 @X0 1 ef ]
 {
-[; ;IO.c: 6: void IO_init(){
+[; ;IO.c: 10: void IO_init(){
 [e :U _IO_init ]
 [f ]
-[; ;IO.c: 8: CMCON = 0x07;
-"8
+[; ;IO.c: 12: CMCON = 0x07;
+"12
 [e = _CMCON -> -> 7 `i `uc ]
-[; ;IO.c: 10: TRISIObits.TRISIO1=0;
-"10
-[e = . . _TRISIObits 0 1 -> -> 0 `i `uc ]
-[; ;IO.c: 11: OPTION_REGbits.nGPPU=1;
-"11
-[e = . . _OPTION_REGbits 0 5 -> -> 1 `i `uc ]
-[; ;IO.c: 13: TRISIObits.TRISIO2=1;
-"13
-[e = . . _TRISIObits 0 2 -> -> 1 `i `uc ]
-[; ;IO.c: 14: TRISIObits.TRISIO3=1;
+[; ;IO.c: 14: TRISIObits.TRISIO1=0;
 "14
-[e = . . _TRISIObits 0 3 -> -> 1 `i `uc ]
-[; ;IO.c: 15: TRISIObits.TRISIO4=1;
+[e = . . _TRISIObits 0 1 -> -> 0 `i `uc ]
+[; ;IO.c: 15: OPTION_REGbits.nGPPU=1;
 "15
-[e = . . _TRISIObits 0 4 -> -> 1 `i `uc ]
-[; ;IO.c: 16: TRISIObits.TRISIO5=1;
-"16
-[e = . . _TRISIObits 0 5 -> -> 1 `i `uc ]
-[; ;IO.c: 19: }
+[e = . . _OPTION_REGbits 0 5 -> -> 1 `i `uc ]
+[; ;IO.c: 17: TRISIObits.TRISIO2=1;
+"17
+[e = . . _TRISIObits 0 2 -> -> 1 `i `uc ]
+[; ;IO.c: 18: TRISIObits.TRISIO3=1;
+"18
+[e = . . _TRISIObits 0 3 -> -> 1 `i `uc ]
+[; ;IO.c: 19: TRISIObits.TRISIO4=1;
 "19
+[e = . . _TRISIObits 0 4 -> -> 1 `i `uc ]
+[; ;IO.c: 20: TRISIObits.TRISIO5=1;
+"20
+[e = . . _TRISIObits 0 5 -> -> 1 `i `uc ]
+[; ;IO.c: 21: TRISIObits.TRISIO0=0;
+"21
+[e = . . _TRISIObits 0 0 -> -> 0 `i `uc ]
+[; ;IO.c: 24: }
+"24
 [e :UE 69 ]
 }
-"21
+"26
 [v _led_click `(v ~T0 @X0 1 ef1`i ]
 {
-[; ;IO.c: 21: void led_click(int times){
+[; ;IO.c: 26: void led_click(int times){
 [e :U _led_click ]
 [v _times `i ~T0 @X0 1 r1 ]
 [f ]
-[; ;IO.c: 22: for(int i=0;i<times;i++){
-"22
+[; ;IO.c: 27: for(int i=0;i<times;i++){
+"27
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
 [e $U 74  ]
 [e :U 71 ]
 {
-[; ;IO.c: 23: GPIObits.GP1=1;
-"23
+[; ;IO.c: 28: GPIObits.GP1=1;
+"28
 [e = . . _GPIObits 0 1 -> -> 1 `i `uc ]
-[; ;IO.c: 24: _delay((unsigned long)((200)*(4000000/4000.0)));
-"24
+[; ;IO.c: 29: _delay((unsigned long)((200)*(4000000/4000.0)));
+"29
 [e ( __delay (1 -> * -> -> 200 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-[; ;IO.c: 25: GPIObits.GP1=0;
-"25
+[; ;IO.c: 30: GPIObits.GP1=0;
+"30
 [e = . . _GPIObits 0 1 -> -> 0 `i `uc ]
-[; ;IO.c: 26: _delay((unsigned long)((200)*(4000000/4000.0)));
-"26
+[; ;IO.c: 31: _delay((unsigned long)((200)*(4000000/4000.0)));
+"31
 [e ( __delay (1 -> * -> -> 200 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"27
+"32
 }
-"22
+"27
 [e ++ _i -> 1 `i ]
 [e :U 74 ]
 [e $ < _i _times 71  ]
 [e :U 72 ]
-"27
+"32
 }
-[; ;IO.c: 27: }
-[; ;IO.c: 28: }
-"28
+[; ;IO.c: 32: }
+[; ;IO.c: 33: }
+"33
 [e :UE 70 ]
 }
-"30
-[v _Send_data `(v ~T0 @X0 1 ef1`*uc ]
+"35
+[v _Send_data `(v ~T0 @X0 1 ef ]
 {
-[; ;IO.c: 30: void Send_data(char command[]){
+[; ;IO.c: 35: void Send_data(){
 [e :U _Send_data ]
-[v _command `*uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;IO.c: 32: }
-"32
+[; ;IO.c: 36: GPIObits.GP1=1;
+"36
+[e = . . _GPIObits 0 1 -> -> 1 `i `uc ]
+[; ;IO.c: 37: change_state=timetick;
+"37
+[e = _change_state _timetick ]
+[; ;IO.c: 38: for(int i=0;i<24;i++){
+"38
+{
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+[e $ < _i -> 24 `i 76  ]
+[e $U 77  ]
+[e :U 76 ]
+{
+[; ;IO.c: 39: if(timetick-change_state>=1000)
+"39
+[e $ ! >= - _timetick _change_state -> -> -> 1000 `i `l `ul 79  ]
+[; ;IO.c: 40: GPIObits.GP1 ^=1;
+"40
+[e =^ . . _GPIObits 0 1 -> -> 1 `i `uc ]
+[e :U 79 ]
+"41
+}
+"38
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 24 `i 76  ]
+[e :U 77 ]
+"41
+}
+[; ;IO.c: 41: }
+[; ;IO.c: 42: }
+"42
 [e :UE 75 ]
 }

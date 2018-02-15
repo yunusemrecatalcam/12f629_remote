@@ -606,7 +606,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [p x CPD=OFF ]
 [; ;IO.h: 10: void IO_init(void);
 [; ;IO.h: 11: void led_click(int);
-[; ;IO.h: 12: void Send_data(char[]);
+[; ;IO.h: 12: void Send_data();
 [; ;timer.h: 7: void Timer_init(void);
 [; ;timer.h: 8: void interrupt kes(void);
 [; ;timer.h: 10: extern uint32_t timetick;
@@ -616,6 +616,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> -> 0 `i `l `ul
 ]
 [; ;main.c: 17: uint32_t timetochange=0;
+"18
+[v _command `uc ~T0 @X0 -> 10 `i e ]
+[; ;main.c: 18: char command[10];
 [v $root$_main `(v ~T0 @X0 0 e ]
 "19
 [v _main `(v ~T0 @X0 1 ef ]
@@ -635,108 +638,108 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 25: timetochange=timetick;
 "25
 [e = _timetochange _timetick ]
-[; ;main.c: 27: while(1){
-"27
+[; ;main.c: 31: while(1){
+"31
 [e :U 71 ]
 {
-[; ;main.c: 28: if(timetick-timetochange>=1000){
-"28
-[e $ ! >= - _timetick _timetochange -> -> -> 1000 `i `l `ul 73  ]
+[; ;main.c: 32: if(timetick-timetochange>=100){
+"32
+[e $ ! >= - _timetick _timetochange -> -> -> 100 `i `l `ul 73  ]
 {
-[; ;main.c: 29: GPIObits.GP1^=1;
-"29
+[; ;main.c: 33: GPIObits.GP1^=1;
+"33
 [e =^ . . _GPIObits 0 1 -> -> 1 `i `uc ]
-[; ;main.c: 30: timetochange=timetick;
-"30
+[; ;main.c: 34: timetochange=timetick;
+"34
 [e = _timetochange _timetick ]
-"31
+"35
 }
 [e :U 73 ]
-"32
+"36
 }
 [e :U 70 ]
-"27
+"31
 [e $U 71  ]
 [e :U 72 ]
-[; ;main.c: 31: }
-[; ;main.c: 32: }
-[; ;main.c: 33: while (1) {
-"33
+[; ;main.c: 35: }
+[; ;main.c: 36: }
+[; ;main.c: 37: while (1) {
+"37
 [e :U 75 ]
 {
-[; ;main.c: 35: if(GPIObits.GP2){
-"35
+[; ;main.c: 39: if(GPIObits.GP2){
+"39
 [e $ ! != -> . . _GPIObits 0 2 `i -> -> -> 0 `i `Vuc `i 77  ]
 {
-[; ;main.c: 36: led_click(1);
-"36
+[; ;main.c: 40: led_click(1);
+"40
 [e ( _led_click (1 -> 1 `i ]
-"37
+"41
 }
-[; ;main.c: 37: }else{
+[; ;main.c: 41: }else{
 [e $U 78  ]
 [e :U 77 ]
 {
-[; ;main.c: 38: if(GPIObits.GP3){
-"38
+[; ;main.c: 42: if(GPIObits.GP3){
+"42
 [e $ ! != -> . . _GPIObits 0 3 `i -> -> -> 0 `i `Vuc `i 79  ]
 {
-[; ;main.c: 39: led_click(2);
-"39
+[; ;main.c: 43: led_click(2);
+"43
 [e ( _led_click (1 -> 2 `i ]
-"40
+"44
 }
-[; ;main.c: 40: }else{
+[; ;main.c: 44: }else{
 [e $U 80  ]
 [e :U 79 ]
 {
-[; ;main.c: 41: if(GPIObits.GP4){
-"41
+[; ;main.c: 45: if(GPIObits.GP4){
+"45
 [e $ ! != -> . . _GPIObits 0 4 `i -> -> -> 0 `i `Vuc `i 81  ]
 {
-[; ;main.c: 42: led_click(3);
-"42
+[; ;main.c: 46: led_click(3);
+"46
 [e ( _led_click (1 -> 3 `i ]
-"43
+"47
 }
-[; ;main.c: 43: }else{
+[; ;main.c: 47: }else{
 [e $U 82  ]
 [e :U 81 ]
 {
-[; ;main.c: 44: if(GPIObits.GP5){
-"44
+[; ;main.c: 48: if(GPIObits.GP5){
+"48
 [e $ ! != -> . . _GPIObits 0 5 `i -> -> -> 0 `i `Vuc `i 83  ]
 {
-[; ;main.c: 45: led_click(4);
-"45
-[e ( _led_click (1 -> 4 `i ]
-"46
-}
-[e :U 83 ]
-"47
-}
-[e :U 82 ]
-"48
-}
-[e :U 80 ]
+[; ;main.c: 49: led_click(4);
 "49
-}
-[e :U 78 ]
+[e ( _led_click (1 -> 4 `i ]
 "50
 }
+[e :U 83 ]
+"51
+}
+[e :U 82 ]
+"52
+}
+[e :U 80 ]
+"53
+}
+[e :U 78 ]
+"54
+}
 [e :U 74 ]
-"33
+"37
 [e $U 75  ]
 [e :U 76 ]
-[; ;main.c: 46: }
-[; ;main.c: 47: }
-[; ;main.c: 48: }
-[; ;main.c: 49: }
 [; ;main.c: 50: }
-[; ;main.c: 53: return;
-"53
-[e $UE 69  ]
+[; ;main.c: 51: }
+[; ;main.c: 52: }
+[; ;main.c: 53: }
 [; ;main.c: 54: }
-"54
+[; ;main.c: 57: return;
+"57
+[e $UE 69  ]
+[; ;main.c: 58: }
+"58
 [e :UE 69 ]
 }

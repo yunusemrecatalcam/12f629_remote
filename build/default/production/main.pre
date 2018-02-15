@@ -861,7 +861,7 @@ typedef uint16_t uintptr_t;
 # 10 "IO.h"
 void IO_init(void);
 void led_click(int);
-void Send_data(char[]);
+void Send_data();
 
 # 7 "timer.h"
 void Timer_init(void);
@@ -871,7 +871,7 @@ extern uint32_t timetick;
 
 # 17 "main.c"
 uint32_t timetochange=0;
-
+char command[10];
 void main(void) {
 
 IO_init();
@@ -880,8 +880,9 @@ Timer_init();
 GPIObits.GP1 =1;
 timetochange=timetick;
 
+# 31
 while(1){
-if(timetick-timetochange>=1000){
+if(timetick-timetochange>=100){
 GPIObits.GP1^=1;
 timetochange=timetick;
 }

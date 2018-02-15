@@ -15,7 +15,7 @@
 #define _XTAL_FREQ 4000000
 
 uint32_t timetochange=0;
-
+char command[10];
 void main(void) {
 
     IO_init();
@@ -23,9 +23,13 @@ void main(void) {
     
     LED =1;
     timetochange=timetick;
+    
+    //while (1) {
+      //  Send_data();
+    //}
 
     while(1){
-        if(timetick-timetochange>=1000){
+        if(timetick-timetochange>=100){
             LED^=1;
             timetochange=timetick;
         }
