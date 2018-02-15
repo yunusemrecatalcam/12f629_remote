@@ -1,6 +1,6 @@
 Version 3.2 HI-TECH Software Intermediate Code
 [p mainexit ]
-"4 IO.h
+"10 IO.h
 [v _IO_init `(v ~T0 @X0 0 ef ]
 "222 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic12f629.h
 [s S14 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -13,10 +13,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S13 . . . ]
 "239
 [v _GPIObits `VS13 ~T0 @X0 0 e@5 ]
-[v F575 `(v ~T0 @X0 1 tf1`ul ]
-"153 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic.h
-[v __delay `JF575 ~T0 @X0 0 e ]
-[p i __delay ]
+"21 main.c
+[v _Button_check `(i ~T0 @X0 0 ef ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -574,38 +572,33 @@ Version 3.2 HI-TECH Software Intermediate Code
 [p x CP=OFF ]
 "13
 [p x CPD=OFF ]
-[; ;IO.h: 4: void IO_init(void);
+[; ;IO.h: 10: void IO_init(void);
 [v $root$_main `(v ~T0 @X0 0 e ]
-"14 main.c
+"15 main.c
 [v _main `(v ~T0 @X0 1 ef ]
 {
-[; ;main.c: 14: void main(void) {
+[; ;main.c: 15: void main(void) {
 [e :U _main ]
 [f ]
-[; ;main.c: 16: IO_init();
-"16
+[; ;main.c: 17: IO_init();
+"17
 [e ( _IO_init ..  ]
-[; ;main.c: 20: while(1){
-"20
+[; ;main.c: 19: GPIObits.GP1 =1;
+"19
+[e = . . _GPIObits 0 1 -> -> 1 `i `uc ]
+[; ;main.c: 21: while(Button_check()){
+"21
+[e $U 70  ]
 [e :U 71 ]
 {
-[; ;main.c: 22: GPIObits.GP1=1;
-"22
-[e = . . _GPIObits 0 1 -> -> 1 `i `uc ]
-[; ;main.c: 23: _delay((unsigned long)((100)*(4000000/4000.0)));
+[; ;main.c: 23: GPIObits.GP1 =0;
 "23
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-[; ;main.c: 24: GPIObits.GP1=0;
-"24
 [e = . . _GPIObits 0 1 -> -> 0 `i `uc ]
-[; ;main.c: 25: _delay((unsigned long)((100)*(4000000/4000.0)));
-"25
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
 "27
 }
 [e :U 70 ]
-"20
-[e $U 71  ]
+"21
+[e $ != ( _Button_check ..  -> 0 `i 71  ]
 [e :U 72 ]
 [; ;main.c: 27: }
 [; ;main.c: 29: return;

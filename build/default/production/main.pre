@@ -768,22 +768,21 @@ extern __bank0 __bit __timeout;
 #pragma config CP = OFF
 #pragma config CPD = OFF
 
-# 4 "IO.h"
+# 10 "IO.h"
 void IO_init(void);
 
-# 14 "main.c"
+# 15 "main.c"
 void main(void) {
 
 IO_init();
 
+GPIObits.GP1 =1;
+
+while(Button_check()){
+
+GPIObits.GP1 =0;
 
 
-while(1){
-
-GPIObits.GP1=1;
-_delay((unsigned long)((100)*(4000000/4000.0)));
-GPIObits.GP1=0;
-_delay((unsigned long)((100)*(4000000/4000.0)));
 
 }
 

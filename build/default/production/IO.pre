@@ -758,10 +758,28 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 
-# 3 "IO.c"
+# 10 "IO.h"
+void IO_init(void);
+
+# 5 "IO.c"
 void IO_init(){
+
 CMCON = 0x07;
 
 TRISIObits.TRISIO1=0;
 OPTION_REGbits.nGPPU=1;
+
+TRISIObits.TRISIO2=1;
+TRISIObits.TRISIO3=1;
+TRISIObits.TRISIO4=1;
+TRISIObits.TRISIO5=1;
+
+
+}
+
+int Button_check(){
+if(GPIObits.GP2 || GPIObits.GP3 || GPIObits.GP4 || GPIObits.GP5)
+return 1;
+else
+return 0;
 }

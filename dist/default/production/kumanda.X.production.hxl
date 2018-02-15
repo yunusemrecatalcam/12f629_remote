@@ -1,13 +1,13 @@
 ### HEXMate logfile and output summary ###
 ### Memory Usage ###
  Unused memory ranges:
-  2h - 7BBh
+  2h - 7ABh
   7FEh - 400Dh
   4010h - 403Fh
   
  dist/default/production\kumanda.X.production.hex ranges:
   0h - 1h
-  7BCh - 7FDh
+  7ACh - 7FDh
   400Eh - 400Fh
   
 ### Hex Memory Map ###
@@ -23,6 +23,6 @@
   X = Find & delete opcode
   1 = dist/default/production\kumanda.X.production.hex
 00000000: 11--------------------------------------------------------------
-00000780: ------------------------------------------------------------1111
+00000780: --------------------------------------------11111111111111111111
 000007C0: 11111111111111111111111111111111111111111111111111111111111111--
 00004000: --------------11------------------------------------------------

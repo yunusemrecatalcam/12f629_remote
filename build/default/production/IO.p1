@@ -20,6 +20,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S34 . . . ]
 "641
 [v _OPTION_REGbits `VS34 ~T0 @X0 0 e@129 ]
+"222
+[s S14 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S14 . GP0 GP1 GP2 GP3 GP4 GP5 ]
+"230
+[s S15 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S15 . GPIO0 GPIO1 GPIO2 GPIO3 GPIO4 GPIO5 ]
+"221
+[u S13 `S14 1 `S15 1 ]
+[n S13 . . . ]
+"239
+[v _GPIObits `VS13 ~T0 @X0 0 e@5 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -563,22 +574,61 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic.h: 193: extern __bank0 unsigned char __resetbits;
 [; ;pic.h: 194: extern __bank0 __bit __powerdown;
 [; ;pic.h: 195: extern __bank0 __bit __timeout;
-"3 IO.c
+[; ;IO.h: 10: void IO_init(void);
+"5 IO.c
 [v _IO_init `(v ~T0 @X0 1 ef ]
 {
-[; ;IO.c: 3: void IO_init(){
+[; ;IO.c: 5: void IO_init(){
 [e :U _IO_init ]
 [f ]
-[; ;IO.c: 4: CMCON = 0x07;
-"4
-[e = _CMCON -> -> 7 `i `uc ]
-[; ;IO.c: 6: TRISIObits.TRISIO1=0;
-"6
-[e = . . _TRISIObits 0 1 -> -> 0 `i `uc ]
-[; ;IO.c: 7: OPTION_REGbits.nGPPU=1;
+[; ;IO.c: 7: CMCON = 0x07;
 "7
+[e = _CMCON -> -> 7 `i `uc ]
+[; ;IO.c: 9: TRISIObits.TRISIO1=0;
+"9
+[e = . . _TRISIObits 0 1 -> -> 0 `i `uc ]
+[; ;IO.c: 10: OPTION_REGbits.nGPPU=1;
+"10
 [e = . . _OPTION_REGbits 0 5 -> -> 1 `i `uc ]
-[; ;IO.c: 8: }
-"8
+[; ;IO.c: 12: TRISIObits.TRISIO2=1;
+"12
+[e = . . _TRISIObits 0 2 -> -> 1 `i `uc ]
+[; ;IO.c: 13: TRISIObits.TRISIO3=1;
+"13
+[e = . . _TRISIObits 0 3 -> -> 1 `i `uc ]
+[; ;IO.c: 14: TRISIObits.TRISIO4=1;
+"14
+[e = . . _TRISIObits 0 4 -> -> 1 `i `uc ]
+[; ;IO.c: 15: TRISIObits.TRISIO5=1;
+"15
+[e = . . _TRISIObits 0 5 -> -> 1 `i `uc ]
+[; ;IO.c: 18: }
+"18
 [e :UE 69 ]
+}
+"20
+[v _Button_check `(i ~T0 @X0 1 ef ]
+{
+[; ;IO.c: 20: int Button_check(){
+[e :U _Button_check ]
+[f ]
+[; ;IO.c: 21: if(GPIObits.GP2 || GPIObits.GP3 || GPIObits.GP4 || GPIObits.GP5)
+"21
+[e $ ! || || || != -> . . _GPIObits 0 2 `i -> -> -> 0 `i `Vuc `i != -> . . _GPIObits 0 3 `i -> -> -> 0 `i `Vuc `i != -> . . _GPIObits 0 4 `i -> -> -> 0 `i `Vuc `i != -> . . _GPIObits 0 5 `i -> -> -> 0 `i `Vuc `i 71  ]
+[; ;IO.c: 22: return 1;
+"22
+[e ) -> 1 `i ]
+[e $UE 70  ]
+[e $U 72  ]
+"23
+[e :U 71 ]
+[; ;IO.c: 23: else
+[; ;IO.c: 24: return 0;
+"24
+[e ) -> 0 `i ]
+[e $UE 70  ]
+[e :U 72 ]
+[; ;IO.c: 25: }
+"25
+[e :UE 70 ]
 }
